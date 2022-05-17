@@ -1,0 +1,81 @@
+[
+{
+    "id": 1,
+    "name":"Erman",
+    "surname":"Zöhre",
+    "birthdate":"28.01",
+    "title": "Mid Level 2"
+         
+},
+    
+    {
+    "id": 2,
+    "name":"Recep",
+    "surname":"Köseoğlu",
+    "birthdate":"19.02",
+    "title": "FE Team Lead"
+},
+
+{
+    "id": 3,
+    "name":"Yeşim",
+    "surname":"Karayiğit",
+    "birthdate":"02.03",
+    "title": "Mid Level 1"     
+},
+
+{
+    "id":4,
+    "name":"Talat",
+    "surname":"Ataç",
+    "birthdate":"20.03",
+    "title": "Mid Level 2"
+      
+},
+
+{
+    "id":5,
+    "name":"Cüneyt",
+    "surname":"Aşkın",
+    "birthdate":"20.04",
+    "title": "Mid Level 2"
+      
+},
+
+{
+    "id":6,
+    "name":"Rümeysa",
+    "surname":"Karagöz",
+    "birthdate":"02.04",
+    "title": "Intern"
+      
+},
+
+{
+    "id":7,
+    "name":"Yusuf",
+    "surname":"Namdar",
+    "birthdate":"08.05",
+    "title": "Mid Level 1"
+     
+},
+
+
+{
+    "id":8,
+    "name":"Emre Birkan",
+    "surname":"Kervan",
+    "birthdate":"04.08",
+    "title": "Mid Level 1"
+     
+},
+
+
+
+{
+    "id":9,
+    "name":"Duygu",
+    "surname":"Şentürk",
+    "birthdate":"23.09",
+    "title": "Mid Level 1"  
+}]

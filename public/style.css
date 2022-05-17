@@ -1,0 +1,112 @@
+body{
+    width: 80%;
+    margin: 0px auto;
+    background-color: rgb(128, 120, 104);
+}
+
+.form {
+  background-color: #fefefe;
+  margin: auto;
+  height: auto;
+  flex-direction: column;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #fff;
+  }
+
+  td,
+  th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  .action {
+    cursor: pointer;
+  }
+  .action:hover {
+    text-decoration: underline;
+  }
+  .action:nth-child(1) {
+    color: red;
+  }
+
+  .action:nth-child(2) {
+    color: green;
+  }
+  .message {
+    text-align: center;
+    height: 21.5px;
+  }
+  button {
+    margin-bottom: 12px;
+  }
+  .form {
+    background-color: #fefefe;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  #addform{
+    border-radius: 10px;
+    width: 400px;
+    margin-top: 50px;
+    padding: 30px;
+  }
+  .subcan{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;}
+    
+  label {
+    margin: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+  input {
+    margin: 8px 0;
+    height: 30px;
+    border-radius: 0px;
+    padding: 4px 8px;
+  }
+
+  .cancelbutton{
+    margin: 8px 0;
+    height: 30px;
+    border-radius: 0px;
+    padding: 4px 8px;
+  }
+
+  dialog {
+    border-radius: 10px;
+    width: 400px;
+    border: none;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 0, 0, 0.25);
+  }
+  dialog[open] {
+    animation: appear 0.15s cubic-bezier(0, 1.8, 1, 1.8);
+  }
+  .success-text {
+    color: green;
+    text-align: center;
+    display: none;
+  }
+  @keyframes appear {
+    from {
+      opacity: 0;
+      transform: translateX(-3rem);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
