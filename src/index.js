@@ -1,33 +1,82 @@
+"use strict"
+import "../src/style.css"
+const inputs = document.querySelectorAll("input")
+const newMember = document.querySelector("#newMemberButton")
 const notification = document.querySelector(".message")
 const dialog = document.querySelector("dialog")
 const successMessage = document.querySelector(".success-text")
+const modalCloseButton = document.querySelector("#modalCloseButton")
+const submitButton = document.querySelector("#submitButton")
 const clearNotifications = () =>
   setTimeout(() => {
     notification.innerHTML = ""
   }, 3000)
 
 const deleteMember = async (id) => {
-  const res = await fetch("/teams/" + id, { method: "delete" })
+  const res = await fetch("/teams/" + id, {
+    method: "delete",
+  })
   const data = await res.json()
   notification.innerHTML = data
   clearNotifications()
   loadMembers()
 }
-deleteMember()
+
+modalCloseButton.onclick = () => {
+  closeUpdate()
+}
+
+newMember.onclick = () => addMember()
+
+const addMemberFetch = async () => {
+  let data = {}
+  inputs.forEach((input) => {
+    if (input.name !== "id") {
+      data = { ...data, [input.name]: input.value }
+    }
+  })
+  const res = await fetch("/teams/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  })
+  const member = await res.json()
+  if (member) {
+    successMessage.style.display = "block"
+    loadMembers()
+    setTimeout(() => {
+      closeUpdate()
+      successMessage.style.display = "none"
+    }, 1000)
+  }
+}
+
+const addMember = async () => {
+  dialog.setAttribute("open", "true")
+  submitButton.onclick = () => {
+    addMemberFetch()
+  }
+
+  const form = document.querySelector(".form")
+  form.children[0].innerHTML = "New Member Form"
+  const idInput = inputs[0]
+  idInput.parentElement.style.display = "none"
+}
 
 const getMember = async (id) => {
   dialog.setAttribute("open", "false")
   const res = await fetch("/teams/" + id)
   const data = await res.json()
-  const inputs = document.querySelectorAll("input")
+  const { member } = data
   inputs.forEach((input) => {
-    input.value = data[input.name] ?? input.value
+    input.value = member[input.name] ?? input.value
   })
+  submitButton.onclick = () => {
+    updateMember()
+  }
 }
-getMember()
 
 const updateMember = async () => {
-  const inputs = document.querySelectorAll("input")
   const id = inputs[0].value
   let data = {}
   inputs.forEach((input) => {
@@ -41,7 +90,8 @@ const updateMember = async () => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   })
-  const member = await res.json()
+  const updateRes = await res.json()
+  const { member } = await updateRes
   if (member) {
     successMessage.style.display = "block"
     loadMembers()
@@ -51,8 +101,6 @@ const updateMember = async () => {
     }, 1000)
   }
 }
-
-updateMember()
 
 const searchInput = document.getElementById("searchBar")
 searchInput.addEventListener("keyup", (e) => searchMember(e.target.value))
@@ -79,6 +127,10 @@ const searchMember = async (value) => {
 
 const closeUpdate = () => {
   dialog.removeAttribute("open")
+  submitButton.removeAttribute("onclick")
+  inputs.forEach((input) => {
+    input.value = ""
+  })
 }
 
 const loadMembers = async () => {
@@ -102,3 +154,9 @@ const loadMembers = async () => {
 }
 
 loadMembers()
+
+window.updateMember = updateMember
+window.getMember = getMember
+window.deleteMember = deleteMember
+window.loadMembers = loadMembers
+window.addMember = addMember

@@ -1,5 +1,6 @@
+
 [
-{
+    {
     "id": 1,
     "name":"Erman",
     "surname":"Zöhre",
@@ -78,4 +79,5 @@
     "surname":"Şentürk",
     "birthdate":"23.09",
     "title": "Mid Level 1"  
-}]
+}
+]

@@ -1,13 +1,27 @@
 const express = require("express")
-const teamdata = require("./routes/team")
-const app = express()
-const dotenv = require("dotenv")
-dotenv.config()
-var port = process.env.port || 5000
+const webpack = require("webpack")
+const webpackDevMiddleware = require("webpack-dev-middleware")
+const webpackHotMiddleware = require("webpack-hot-middleware")
+const config = require("./webpack.dev.js")
+const compiler = webpack(config)
 
+var port = process.env.port || 3000
+const teamdata = require("./src/team")
+
+const app = express()
+app.use(express.static("dist"))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-app.use(express.static("public"))
+
+if (process.env.NODE_ENV !== "production") {
+  app.use(
+    webpackDevMiddleware(compiler, {
+      publicPath: config.output.publicPath,
+      writeToDisk: true,
+    })
+  )
+  app.use(webpackHotMiddleware(compiler))
+}
 
 //Data-All
 app.get("/teams", function (req, res) {
@@ -96,3 +110,4 @@ app.get("*", (req, res) => {
 app.listen(port, () => {
   console.log(`Localhost ${port}`)
 })
+console.log(process.env.NODE_ENV)
